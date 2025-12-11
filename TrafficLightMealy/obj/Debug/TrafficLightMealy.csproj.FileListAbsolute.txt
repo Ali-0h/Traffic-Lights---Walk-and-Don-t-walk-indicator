@@ -8,3 +8,12 @@ C:\Users\ACER\Desktop\Chatbot Ai\TrafficLightMealy\TrafficLightMealy\bin\Debug\T
 C:\Users\ACER\Desktop\Chatbot Ai\TrafficLightMealy\TrafficLightMealy\obj\Debug\TrafficLightMealy.exe
 C:\Users\ACER\Desktop\Chatbot Ai\TrafficLightMealy\TrafficLightMealy\obj\Debug\TrafficLightMealy.pdb
 C:\Users\ACER\Desktop\Chatbot Ai\TrafficLightMealy\TrafficLightMealy\obj\Debug\TrafficLightMealy.exe.config
+C:\Users\ACER\Desktop\Github\Traffic-Lights---Walk-and-Don-t-walk-indicator\TrafficLightMealy\bin\Debug\TrafficLightMealy.exe.config
+C:\Users\ACER\Desktop\Github\Traffic-Lights---Walk-and-Don-t-walk-indicator\TrafficLightMealy\bin\Debug\TrafficLightMealy.exe
+C:\Users\ACER\Desktop\Github\Traffic-Lights---Walk-and-Don-t-walk-indicator\TrafficLightMealy\bin\Debug\TrafficLightMealy.pdb
+C:\Users\ACER\Desktop\Github\Traffic-Lights---Walk-and-Don-t-walk-indicator\TrafficLightMealy\obj\Debug\TrafficLightMealy.csproj.AssemblyReference.cache
+C:\Users\ACER\Desktop\Github\Traffic-Lights---Walk-and-Don-t-walk-indicator\TrafficLightMealy\obj\Debug\TrafficLightMealy.Properties.Resources.resources
+C:\Users\ACER\Desktop\Github\Traffic-Lights---Walk-and-Don-t-walk-indicator\TrafficLightMealy\obj\Debug\TrafficLightMealy.csproj.GenerateResource.cache
+C:\Users\ACER\Desktop\Github\Traffic-Lights---Walk-and-Don-t-walk-indicator\TrafficLightMealy\obj\Debug\TrafficLightMealy.csproj.CoreCompileInputs.cache
+C:\Users\ACER\Desktop\Github\Traffic-Lights---Walk-and-Don-t-walk-indicator\TrafficLightMealy\obj\Debug\TrafficLightMealy.exe
+C:\Users\ACER\Desktop\Github\Traffic-Lights---Walk-and-Don-t-walk-indicator\TrafficLightMealy\obj\Debug\TrafficLightMealy.pdb

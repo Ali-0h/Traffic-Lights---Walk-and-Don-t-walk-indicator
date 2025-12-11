@@ -33,7 +33,7 @@ namespace TrafficLightMealy
             DoubleBuffered = true;
             BackColor = Color.FromArgb(245, 247, 250);
 
-            // fonts (avoid SemiBold)
+            // fonts
             headerFont = new Font("Segoe UI", 14, FontStyle.Bold);
             titleFont = new Font("Segoe UI", 12, FontStyle.Bold);
             normalFont = new Font("Segoe UI", 10, FontStyle.Regular);
@@ -139,7 +139,7 @@ namespace TrafficLightMealy
             DrawPedBoxes(g);
             DrawPressButton(g);
             DrawStateLabel(g);
-            DrawDiagram(g);
+            DrawDiagramWithCurvedArrows(g);
             DrawInfoBox(g);
             DrawFooter(g);
         }
@@ -194,7 +194,15 @@ namespace TrafficLightMealy
             }
 
             // radial-ish fill using PathGradientBrush
-            using (GraphicsPath gp = new GraphicsPath()) { gp.AddEllipse(rect); using (PathGradientBrush pgb = new PathGradientBrush(gp)) { pgb.CenterColor = ControlPaint.Light(color); pgb.SurroundColors = new Color[] { ControlPaint.Dark(color) }; g.FillEllipse(pgb, rect); } }
+            GraphicsPath gp = new GraphicsPath();
+            gp.AddEllipse(rect);
+            PathGradientBrush pgb = new PathGradientBrush(gp);
+            pgb.CenterColor = ControlPaint.Light(color);
+            pgb.SurroundColors = new Color[] { ControlPaint.Dark(color) };
+            g.FillEllipse(pgb, rect);
+            pgb.Dispose();
+            gp.Dispose();
+
             g.DrawEllipse(Pens.Black, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
@@ -233,7 +241,8 @@ namespace TrafficLightMealy
             g.DrawString(text, normalFont, Brushes.DimGray, stateLabelRect);
         }
 
-        private void DrawDiagram(Graphics g)
+        // --- NEW: curved arrows diagram drawing (no labels) ---
+        private void DrawDiagramWithCurvedArrows(Graphics g)
         {
             using (Pen pen = new Pen(Color.FromArgb(200, 200, 200))) g.DrawRoundedRectangle(pen, diagramRect, 8);
 
@@ -245,14 +254,82 @@ namespace TrafficLightMealy
             PointF pYellow = new PointF(cx, top + r * 3 + 18);
             PointF pRed = new PointF(cx, top + r * 5 + 36);
 
-            // arrows
-            DrawArrow(g, pGreen, pYellow);
-            DrawArrow(g, pYellow, pRed);
-            DrawArrow(g, pRed, pGreen);
+            // draw curved arrows:
+            // Green -> Yellow (short downward curve)
+            DrawCurvedArrow(g, pGreen, pYellow, 0.0f, 0.0f);
 
+            // Yellow -> Red (straight downward curve)
+            DrawCurvedArrow(g, pYellow, pRed, 0.0f, 0.0f);
+
+            // Red -> Green (curved arc on the right)
+            DrawCurvedArrow(g, pRed, pGreen, 120f, -120f); // control point offsets create right-side loop
+
+            // draw nodes
             DrawNode(g, pGreen, r, "Car Green\nPed Don't Walk", controller.CurrentState == TState.Green);
             DrawNode(g, pYellow, r, "Car Yellow\nPed Don't Walk", controller.CurrentState == TState.Yellow);
             DrawNode(g, pRed, r, "Car Red\nPed Walk", controller.CurrentState == TState.RedWalk || controller.CurrentState == TState.RedFlash || controller.CurrentState == TState.RedWait);
+        }
+
+        // Draw a cubic Bezier curve between two points with arrowhead.
+        // cpOffset1/cpOffset2 adjust the control points to curve the path; use 0 for near-straight.
+        private void DrawCurvedArrow(Graphics g, PointF start, PointF end, float cpOffset1, float cpOffset2)
+        {
+            // define control points based on offsets
+            PointF cp1 = new PointF(start.X + cpOffset1, start.Y + (end.Y - start.Y) / 2f);
+            PointF cp2 = new PointF(end.X + cpOffset2, start.Y + (end.Y - start.Y) / 2f);
+
+            using (GraphicsPath path = new GraphicsPath())
+            {
+                path.AddBezier(start, cp1, cp2, end);
+                using (Pen pen = new Pen(Color.FromArgb(100, 80, 90, 120), 2f))
+                {
+                    pen.EndCap = LineCap.Flat;
+                    pen.StartCap = LineCap.Flat;
+                    g.DrawPath(pen, path);
+
+                    // draw arrowhead at end: sample tangent direction
+                    // approximate derivative of cubic bezier at t = 0.95
+                    float t = 0.95f;
+                    PointF tangent = BezierTangent(start, cp1, cp2, end, t);
+                    DrawArrowHead(g, tangent, end, 10f, pen.Color);
+                }
+            }
+        }
+
+        // compute tangent (derivative) of cubic bezier at t
+        private PointF BezierTangent(PointF p0, PointF p1, PointF p2, PointF p3, float t)
+        {
+            float u = 1 - t;
+            float tt = t * t;
+            float uu = u * u;
+
+            float x = 3 * uu * (p1.X - p0.X) + 6 * u * t * (p2.X - p1.X) + 3 * tt * (p3.X - p2.X);
+            float y = 3 * uu * (p1.Y - p0.Y) + 6 * u * t * (p2.Y - p1.Y) + 3 * tt * (p3.Y - p2.Y);
+            return new PointF(x, y);
+        }
+
+        // draw a triangular arrowhead given direction tangent and end point
+        private void DrawArrowHead(Graphics g, PointF tangent, PointF tip, float size, Color color)
+        {
+            // Normalize tangent
+            float len = (float)Math.Sqrt(tangent.X * tangent.X + tangent.Y * tangent.Y);
+            if (len < 0.001f) return;
+            float dx = tangent.X / len;
+            float dy = tangent.Y / len;
+
+            // perpendicular
+            float px = -dy;
+            float py = dx;
+
+            // points for triangle
+            PointF p1 = new PointF(tip.X - dx * size + px * (size * 0.5f), tip.Y - dy * size + py * (size * 0.5f));
+            PointF p2 = new PointF(tip.X - dx * size - px * (size * 0.5f), tip.Y - dy * size - py * (size * 0.5f));
+
+            using (SolidBrush sb = new SolidBrush(color))
+            {
+                PointF[] tri = new PointF[] { tip, p1, p2 };
+                g.FillPolygon(sb, tri);
+            }
         }
 
         private void DrawNode(Graphics g, PointF center, float r, string text, bool active)
@@ -305,7 +382,7 @@ namespace TrafficLightMealy
             if (pressRect.Contains(p))
             {
                 controller.PressPedButton();
-                this.Invalidate(System.Drawing.Rectangle.Ceiling(pressRect));
+                this.Invalidate(Rectangle.Ceiling(pressRect));
             }
         }
 
@@ -320,15 +397,6 @@ namespace TrafficLightMealy
             gp.AddArc(rect.Left, rect.Bottom - d, d, d, 90, 90);
             gp.CloseFigure();
             return gp;
-        }
-
-        private static void DrawArrow(Graphics g, PointF a, PointF b)
-        {
-            using (Pen pen = new Pen(Color.DarkGray, 2f))
-            {
-                pen.EndCap = LineCap.ArrowAnchor;
-                g.DrawLine(pen, a, b);
-            }
         }
     }
 
