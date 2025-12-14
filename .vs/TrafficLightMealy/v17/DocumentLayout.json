@@ -1,17 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\TrafficLightMealy\\",
+  "WorkspaceRootPath": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Chatbot Ai\\TrafficLightMealy\\trafficlightmealy\\trafficcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\trafficcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|c:\\users\\acer\\desktop\\chatbot ai\\trafficlightmealy\\trafficlightmealy\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|c:\\users\\acer\\desktop\\github\\traffic-lights---walk-and-don-t-walk-indicator\\trafficlightmealy\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Chatbot Ai\\TrafficLightMealy\\trafficlightmealy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|c:\\users\\acer\\desktop\\github\\traffic-lights---walk-and-don-t-walk-indicator\\trafficlightmealy\\dfaview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\dfaview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|c:\\users\\acer\\desktop\\github\\traffic-lights---walk-and-don-t-walk-indicator\\trafficlightmealy\\dfadiagram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\dfadiagram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\trafficlightmealy\\trafficcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\trafficcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\trafficlightmealy\\properties\\resources.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\properties\\resources.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\trafficlightmealy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -29,46 +41,81 @@
               "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DfaView.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\DfaView.cs",
+              "RelativeDocumentMoniker": "TrafficLightMealy\\DfaView.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\DfaView.cs",
+              "RelativeToolTip": "TrafficLightMealy\\DfaView.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAmwFcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T13:38:11.266Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "DfaDiagram.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\DfaDiagram.cs",
+              "RelativeDocumentMoniker": "TrafficLightMealy\\DfaDiagram.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\DfaDiagram.cs",
+              "RelativeToolTip": "TrafficLightMealy\\DfaDiagram.cs",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAIwJMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T13:12:53.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\TrafficLightMealy\\TrafficLightMealy\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\Form1.cs",
               "RelativeDocumentMoniker": "TrafficLightMealy\\Form1.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\TrafficLightMealy\\TrafficLightMealy\\Form1.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\Form1.cs",
               "RelativeToolTip": "TrafficLightMealy\\Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMwAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAABUBAAAAAAAAAAAcwCYBAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-10T16:50:16.389Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "Resources.resx",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\Properties\\Resources.resx",
+              "RelativeDocumentMoniker": "TrafficLightMealy\\Properties\\Resources.resx",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\Properties\\Resources.resx",
+              "RelativeToolTip": "TrafficLightMealy\\Properties\\Resources.resx",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2025-12-14T10:56:22.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "TrafficController.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\TrafficLightMealy\\TrafficLightMealy\\TrafficController.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\TrafficController.cs",
               "RelativeDocumentMoniker": "TrafficLightMealy\\TrafficController.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\TrafficLightMealy\\TrafficLightMealy\\TrafficController.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\TrafficController.cs",
               "RelativeToolTip": "TrafficLightMealy\\TrafficController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAmwKYAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-10T16:53:17.29Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\TrafficLightMealy\\TrafficLightMealy\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\Program.cs",
               "RelativeDocumentMoniker": "TrafficLightMealy\\Program.cs",
-              "ToolTip": "C:\\Users\\ACER\\Desktop\\Chatbot Ai\\TrafficLightMealy\\TrafficLightMealy\\Program.cs",
+              "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\Program.cs",
               "RelativeToolTip": "TrafficLightMealy\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T16:50:17.014Z"
+              "WhenOpened": "2025-12-10T16:50:17.014Z",
+              "EditorCaption": ""
             }
           ]
         }
