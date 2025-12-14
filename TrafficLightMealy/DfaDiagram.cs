@@ -32,25 +32,23 @@ namespace TrafficLightMealy
             DrawTitle(g, area);
 
             int count = labels.Length;
-            int radius = 26;
+            int radius = 22;
             int spacing = (area.Width - 40) / (count - 1);
-            int centerY = area.Top + 100;
+            int centerY = area.Top + area.Height / 2 + 10;
 
             Point[] centers = new Point[count];
 
             for (int i = 0; i < count; i++)
             {
                 centers[i] = new Point(
-                    area.Left + 2 + spacing * i + spacing / 3,
+                    area.Left + 20 + spacing * i,
                     centerY
                 );
             }
 
-            // Draw normal transitions
+            // Forward transitions
             for (int i = 0; i < count - 1; i++)
-            {
                 DrawArrow(g, centers[i], centers[i + 1]);
-            }
 
             // Transition labels
             DrawLabel(g, "Timeout", Mid(centers[0], centers[1]));
@@ -61,13 +59,11 @@ namespace TrafficLightMealy
 
             // Reset arcs
             DrawResetArc(g, centers[5], centers[0], "reset", -60);
-            DrawResetArc(g, centers[2], centers[0], "reset", -30);
+            DrawResetArc(g, centers[2], centers[0], "no request", -30);
 
-            // Draw states last (on top)
+            // States
             for (int i = 0; i < count; i++)
-            {
                 DrawState(g, centers[i], radius, labels[i], current == states[i]);
-            }
         }
 
         private void DrawTitle(Graphics g, Rectangle area)
@@ -78,8 +74,8 @@ namespace TrafficLightMealy
                     "Mealy Machine – State Diagram",
                     f,
                     Brushes.White,
-                    area.Left + 10,
-                    area.Top + 10
+                    area.Left + 6,
+                    area.Top + 6
                 );
             }
         }
@@ -109,7 +105,7 @@ namespace TrafficLightMealy
             using (Pen p = new Pen(Color.White, 2))
             {
                 p.CustomEndCap = new AdjustableArrowCap(4, 4);
-                g.DrawLine(p, from.X + 26, from.Y, to.X - 26, to.Y);
+                g.DrawLine(p, from.X + 22, from.Y, to.X - 22, to.Y);
             }
         }
 
@@ -124,8 +120,7 @@ namespace TrafficLightMealy
                 g.DrawBezier(p, from, c1, c2, to);
             }
 
-            Point labelPos = new Point((from.X + to.X) / 2, from.Y + height - 10);
-            DrawLabel(g, label, labelPos);
+            DrawLabel(g, label, new Point((from.X + to.X) / 2, from.Y + height - 10));
         }
 
         private void DrawLabel(Graphics g, string text, Point pos)

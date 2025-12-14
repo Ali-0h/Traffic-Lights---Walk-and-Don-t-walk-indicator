@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\trafficlightmealy\\dfadiagram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\dfadiagram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\trafficlightmealy\\trafficcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\trafficcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\trafficlightmealy\\dfaview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\dfaview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\trafficlightmealy\\dfadiagram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|solutionrelative:trafficlightmealy\\dfadiagram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BB9A18C1-4C03-42BE-8B48-DFE03405796A}|TrafficLightMealy\\TrafficLightMealy.csproj|C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\trafficlightmealy\\properties\\resources.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
@@ -34,8 +34,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -44,18 +48,14 @@
               "RelativeDocumentMoniker": "TrafficLightMealy\\Form1.cs",
               "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\Form1.cs",
               "RelativeToolTip": "TrafficLightMealy\\Form1.cs",
-              "ViewState": "AgIAAOkAAAAAAAAAAADgv/gAAABQAAAAAAAAAA==",
+              "ViewState": "AgIAABYBAAAAAAAAAAAUwD4BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-10T16:50:16.389Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "DfaView.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\DfaView.cs",
               "RelativeDocumentMoniker": "TrafficLightMealy\\DfaView.cs",
@@ -67,15 +67,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "DfaDiagram.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\DfaDiagram.cs",
               "RelativeDocumentMoniker": "TrafficLightMealy\\DfaDiagram.cs",
               "ToolTip": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\DfaDiagram.cs",
               "RelativeToolTip": "TrafficLightMealy\\DfaDiagram.cs",
-              "ViewState": "AgIAAH0AAAAAAAAAAAAIwJMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAwwI4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-14T13:12:53.584Z"
+              "WhenOpened": "2025-12-14T13:12:53.584Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -90,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "TrafficController.cs",
               "DocumentMoniker": "C:\\Users\\ACER\\Desktop\\Github\\Traffic-Lights---Walk-and-Don-t-walk-indicator\\TrafficLightMealy\\TrafficController.cs",
               "RelativeDocumentMoniker": "TrafficLightMealy\\TrafficController.cs",
@@ -98,8 +99,7 @@
               "RelativeToolTip": "TrafficLightMealy\\TrafficController.cs",
               "ViewState": "AgIAAJ8AAAAAAAAAAAAmwKYAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-10T16:53:17.29Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-10T16:53:17.29Z"
             },
             {
               "$type": "Document",

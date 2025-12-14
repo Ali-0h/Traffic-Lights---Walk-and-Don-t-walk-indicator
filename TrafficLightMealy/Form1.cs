@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace TrafficLightMealy
@@ -12,14 +13,17 @@ namespace TrafficLightMealy
         private Timer flashTimer;
         private bool flashVisible = true;
 
-        // DFA VIEW (scrollable)
-        private DfaView dfaView;
+        private DfaDiagram dfa = new DfaDiagram();
+
+        // Right panel content
+        private Panel dfaPanel;
+        private Panel descriptionPanel;
+        private Label descriptionLabel;
 
         // layout
         private RectangleF headerRect, leftPanelRect, rightPanelRect, footerRect;
         private Rectangle imageRect, pressRect, stateLabelRect;
 
-        // image
         private Image sceneImage;
 
         // fonts
@@ -39,55 +43,83 @@ namespace TrafficLightMealy
             boldFont = new Font("Segoe UI", 11, FontStyle.Bold);
 
             controller = new TrafficController();
-            controller.StateChanged += (_, __) => Invalidate();
-            controller.OutputsUpdated += (_, __) => Invalidate();
+
+            // 🔴 IMPORTANT: only repaint what is needed
+            controller.StateChanged += (s, e) =>
+            {
+                dfaPanel.Invalidate();
+                Invalidate(imageRect);
+            };
 
             uiTimer = new Timer { Interval = 200 };
-            uiTimer.Tick += (_, __) => controller.Tick(uiTimer.Interval);
+            uiTimer.Tick += (s, e) => controller.Tick(uiTimer.Interval);
             uiTimer.Start();
 
-            flashTimer = new Timer { Interval = 400 };
-            flashTimer.Tick += (_, __) =>
+            flashTimer = new Timer { Interval = 1000 };
+            flashTimer.Tick += (s, e) =>
             {
                 flashVisible = !flashVisible;
-                Invalidate();
+                Invalidate(imageRect); // image only
             };
             flashTimer.Start();
 
             sceneImage = Properties.Resources.GreenCarGoing;
 
             MouseDown += Form1_MouseDown;
-            Resize += (_, __) => LayoutRects();
+            Resize += (s, e) => LayoutRects();
 
+            CreateRightPanelContent();
             LayoutRects();
-            CreateDfaView();
+            UpdateDescription();
         }
 
-        // ---------------- DFA PANEL ----------------
+        // ================= RIGHT PANEL =================
 
-        private void CreateDfaView()
+        private void CreateRightPanelContent()
         {
-            dfaView = new DfaView();
-            Controls.Add(dfaView);
-            UpdateDfaBounds();
-        }
+            dfaPanel = new Panel
+            {
+                BackColor = Color.Transparent
+            };
 
-        private void UpdateDfaBounds()
-        {
-            if (dfaView == null) return;
-
-            dfaView.Location = new Point(
-                (int)rightPanelRect.Left + 10,
-                (int)rightPanelRect.Top + 10
+            // ✅ Enable double buffering on DFA panel (CRITICAL)
+            typeof(Panel).InvokeMember(
+                "DoubleBuffered",
+                BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
+                null,
+                dfaPanel,
+                new object[] { true }
             );
 
-            dfaView.Size = new Size(
-                (int)rightPanelRect.Width - 20,
-                (int)rightPanelRect.Height - 20
-            );
+            descriptionPanel = new Panel
+            {
+                AutoScroll = true,
+                BackColor = Color.FromArgb(25, 25, 25)
+            };
+
+            descriptionLabel = new Label
+            {
+                ForeColor = Color.Gainsboro,
+                Font = normalFont,
+                AutoSize = false
+            };
+
+            descriptionPanel.Controls.Add(descriptionLabel);
+            Controls.Add(dfaPanel);
+            Controls.Add(descriptionPanel);
+
+            dfaPanel.Paint += (s, e) =>
+            {
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                dfa.Draw(
+                    e.Graphics,
+                    new Rectangle(0, 0, dfaPanel.Width, dfaPanel.Height),
+                    controller.CurrentState
+                );
+            };
         }
 
-        // ---------------- LAYOUT ----------------
+        // ================= LAYOUT =================
 
         private void LayoutRects()
         {
@@ -111,50 +143,49 @@ namespace TrafficLightMealy
                 leftPanelRect.Height - 120
             ));
 
-            pressRect = Rectangle.Round(new RectangleF(
-                imageRect.Left,
-                imageRect.Bottom + 10,
-                180,
-                44
-            ));
+            pressRect = new Rectangle(imageRect.Left, imageRect.Bottom + 10, 180, 44);
+            stateLabelRect = new Rectangle(imageRect.Left, pressRect.Bottom + 6, imageRect.Width, 24);
 
-            stateLabelRect = Rectangle.Round(new RectangleF(
-                imageRect.Left,
-                pressRect.Bottom + 6,
-                imageRect.Width,
-                24
-            ));
+            int dfaHeight = 220;
 
-            UpdateDfaBounds();
+            dfaPanel.Bounds = new Rectangle(
+                (int)rightPanelRect.Left + 10,
+                (int)rightPanelRect.Top + 10,
+                (int)rightPanelRect.Width - 20,
+                dfaHeight
+            );
+
+            descriptionPanel.Bounds = new Rectangle(
+                dfaPanel.Left,
+                dfaPanel.Bottom + 10,
+                dfaPanel.Width,
+                (int)rightPanelRect.Height - dfaHeight - 30
+            );
+
+            descriptionLabel.Bounds = new Rectangle(
+                10, 10,
+                descriptionPanel.Width - 30,
+                1000
+            );
         }
 
-        // ---------------- PAINT ----------------
+        // ================= PAINT =================
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            DrawHeader(g);
-            DrawPanels(g);
-
-            DrawSceneImage(g);
-            DrawImageOverlay(g);
-            DrawPressButton(g);
-            DrawStateLabel(g);
-
-            DrawFooter(g);
-
-            // update DFA state
-            if (dfaView != null)
-            {
-                dfaView.CurrentState = controller.CurrentState;
-                dfaView.Invalidate();
-            }
+            DrawHeader(e.Graphics);
+            DrawPanels(e.Graphics);
+            DrawSceneImage(e.Graphics);
+            DrawImageOverlay(e.Graphics);
+            DrawPressButton(e.Graphics);
+            DrawStateLabel(e.Graphics);
+            DrawFooter(e.Graphics);
         }
 
-        // ---------------- DRAW HELPERS ----------------
+        // ================= DRAW HELPERS =================
 
         private void DrawHeader(Graphics g)
         {
@@ -187,9 +218,7 @@ namespace TrafficLightMealy
                     sceneImage = Properties.Resources.YellowCarStop;
                     break;
                 default:
-                    sceneImage = controller.PedOutput == PedSignal.Walk
-                        ? Properties.Resources.RedCrossing
-                        : Properties.Resources.GreenFinished;
+                    sceneImage = Properties.Resources.GreenFinished;
                     break;
             }
 
@@ -198,33 +227,32 @@ namespace TrafficLightMealy
 
         private void DrawImageOverlay(Graphics g)
         {
-            int seconds = GetRemainingSeconds();
-            Rectangle timerRect = new Rectangle(imageRect.Right - 110, imageRect.Top + 10, 100, 34);
+            int total =
+                controller.CurrentState == TState.Green ? 30000 :
+                controller.CurrentState == TState.Yellow ? 3000 :
+                15000;
+
+            int remaining = Math.Max(0, total - controller.ElapsedMilliseconds);
+            int seconds = (int)Math.Ceiling(remaining / 1000.0);
+
+            Rectangle timerRect = new Rectangle(
+                imageRect.Right - 110,
+                imageRect.Top + 10,
+                100,
+                34
+            );
 
             using (SolidBrush bg = new SolidBrush(Color.FromArgb(160, 0, 0, 0)))
                 g.FillRectangle(bg, timerRect);
 
             DrawCenteredText(g, $"{seconds}s", boldFont, Brushes.White, timerRect);
-
-            bool flashingDontWalk = controller.PedOutput == PedSignal.Flashing && !flashVisible;
-            string pedText = controller.PedOutput == PedSignal.Walk && !flashingDontWalk
-                ? "WALK"
-                : "DON'T WALK";
-
-            Brush pedBrush = pedText == "WALK" ? Brushes.Lime : Brushes.OrangeRed;
-            Rectangle pedRect = new Rectangle(imageRect.Left + 10, imageRect.Bottom - 36, 160, 28);
-
-            using (SolidBrush bg = new SolidBrush(Color.FromArgb(160, 0, 0, 0)))
-                g.FillRectangle(bg, pedRect);
-
-            DrawCenteredText(g, pedText, boldFont, pedBrush, pedRect);
         }
 
         private void DrawPressButton(Graphics g)
         {
             bool disabled = controller.IsPedRequestQueued;
 
-            using (SolidBrush sb = new SolidBrush(disabled ? Color.FromArgb(80, 80, 80) : Color.FromArgb(0, 120, 255)))
+            using (SolidBrush sb = new SolidBrush(disabled ? Color.Gray : Color.FromArgb(0, 120, 255)))
                 g.FillRoundedRectangle(sb, pressRect, 8);
 
             DrawCenteredText(
@@ -238,57 +266,74 @@ namespace TrafficLightMealy
 
         private void DrawStateLabel(Graphics g)
         {
-            string text = $"State: {controller.CurrentState} | Ped: {controller.PedOutput}";
-            g.DrawString(text, normalFont, Brushes.LightGray, stateLabelRect);
+            g.DrawString(
+                "State: " + controller.CurrentState,
+                normalFont,
+                Brushes.LightGray,
+                stateLabelRect
+            );
         }
 
         private void DrawFooter(Graphics g)
         {
             DrawCenteredText(
                 g,
-                "Members: Bj De Los Angeles, Kenn Calingasan, Jay Marck Maniegos",
+                "Mealy Machine Traffic Controller Demo",
                 normalFont,
                 Brushes.Gray,
                 Rectangle.Round(footerRect)
             );
         }
 
-        // ---------------- LOGIC ----------------
-
-        private int GetRemainingSeconds()
+        private void UpdateDescription()
         {
-            int total =
-                controller.CurrentState == TState.Green ? 30000 :
-                controller.CurrentState == TState.Yellow ? 3000 :
-                15000;
+            descriptionLabel.Text =
+        @"SYSTEM OVERVIEW
+This system models a traffic intersection using a Mealy Machine.
+Outputs depend on both the current state and the input conditions.
 
-            int remaining = Math.Max(0, total - controller.ElapsedMilliseconds);
-            return (int)Math.Ceiling(remaining / 1000.0);
+STATES
+• Green – Cars may proceed. Pedestrians must wait.
+• Yellow – Warning phase before stopping cars.
+• Red – Cars stop. Pedestrian request may be evaluated.
+• Red Wait – Short delay before allowing crossing.
+• Red Crossing – Pedestrians cross while cars remain stopped.
+• Green Finish – Transition buffer before returning to Green.
+
+INPUTS
+• Timeout – Automatic transition after fixed duration.
+• Walk = true – Pedestrian button pressed.
+
+OUTPUTS
+• Car Signal – Green, Yellow, Red
+• Pedestrian Signal – Walk, Don’t Walk, Flashing
+
+RESET BEHAVIOR
+After Green Finish, or if no pedestrian request exists,
+the system resets to the Green state.
+
+MEALY MACHINE PROPERTY
+Outputs update immediately when inputs occur,
+not only when states change.";
         }
+
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             if (pressRect.Contains(e.Location) && !controller.IsPedRequestQueued)
-            {
                 controller.PressPedButton();
-                Invalidate();
-            }
         }
 
         private void DrawCenteredText(Graphics g, string text, Font font, Brush brush, Rectangle rect)
         {
-            using (StringFormat sf = new StringFormat
+            StringFormat sf = new StringFormat
             {
                 Alignment = StringAlignment.Center,
                 LineAlignment = StringAlignment.Center
-            })
-            {
-                g.DrawString(text, font, brush, rect, sf);
-            }
+            };
+            g.DrawString(text, font, brush, rect, sf);
         }
     }
-
-    // ---------------- EXTENSIONS ----------------
 
     static class GraphicsExtensions
     {
