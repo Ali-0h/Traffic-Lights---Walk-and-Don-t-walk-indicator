@@ -246,7 +246,7 @@ namespace TrafficLightMealy
         {
             DrawCenteredText(
                 g,
-                "Mealy Machine Traffic Controller Demo",
+                "Members: Bj De Los Angeles, Kenn Calingasan, Jay Marck Maniegos",
                 normalFont,
                 Brushes.Gray,
                 Rectangle.Round(footerRect)
