@@ -288,33 +288,17 @@ namespace TrafficLightMealy
         private void UpdateDescription()
         {
             descriptionLabel.Text =
-        @"SYSTEM OVERVIEW
-This system models a traffic intersection using a Mealy Machine.
-Outputs depend on both the current state and the input conditions.
+        @"Formal Description:
+The traffic intersection control system is modeled using a Mealy Machine, where system outputs depend on both the current state and the active input conditions. This allows the system to respond immediately to input changes rather than waiting for a state transition.
 
-STATES
-• Green – Cars may proceed. Pedestrians must wait.
-• Yellow – Warning phase before stopping cars.
-• Red – Cars stop. Pedestrian request may be evaluated.
-• Red Wait – Short delay before allowing crossing.
-• Red Crossing – Pedestrians cross while cars remain stopped.
-• Green Finish – Transition buffer before returning to Green.
+The system operates through several defined states: Green, Yellow, Red, Red Wait, Red Crossing, and Green Finish. Each state represents a specific phase of traffic and pedestrian control. The Green state allows vehicles to proceed while pedestrians wait, followed by the Yellow warning phase before vehicles are required to stop. In the Red state, vehicles remain stopped and pedestrian requests are evaluated.
 
-INPUTS
-• Timeout – Automatic transition after fixed duration.
-• Walk = true – Pedestrian button pressed.
+The system accepts two primary input signals. A Timeout input triggers automatic state transitions after a fixed duration, while Walk = true indicates that a pedestrian has pressed the crossing request button. These inputs influence both the system’s state transitions and output behavior.
 
-OUTPUTS
-• Car Signal – Green, Yellow, Red
-• Pedestrian Signal – Walk, Don’t Walk, Flashing
+Based on the current state and inputs, the system produces outputs for both vehicles and pedestrians. The Car Signal may display Green, Yellow, or Red, while the Pedestrian Signal may display Walk, Don’t Walk, or Flashing. When a pedestrian request is detected, the system enters the Red Wait state to ensure safety before allowing pedestrians to cross during the Red Crossing state, while vehicles remain stopped.
 
-RESET BEHAVIOR
-After Green Finish, or if no pedestrian request exists,
-the system resets to the Green state.
-
-MEALY MACHINE PROPERTY
-Outputs update immediately when inputs occur,
-not only when states change.";
+After the pedestrian crossing is completed, or if no pedestrian request exists, the system transitions through the Green Finish state and resets to the Green state, allowing normal traffic flow to resume. As a Mealy Machine, the system updates its outputs immediately in response to input changes, ensuring responsive and efficient intersection control.
+";
         }
 
 
