@@ -288,18 +288,81 @@ namespace TrafficLightMealy
         private void UpdateDescription()
         {
             descriptionLabel.Text =
-        @"Formal Description:
-The traffic intersection control system is modeled using a Mealy Machine, where system outputs depend on both the current state and the active input conditions. This allows the system to respond immediately to input changes rather than waiting for a state transition.
+        @"FORMAL DESCRIPTION (MEALY MACHINE)
 
-The system operates through several defined states: Green, Yellow, Red, Red Wait, Red Crossing, and Green Finish. Each state represents a specific phase of traffic and pedestrian control. The Green state allows vehicles to proceed while pedestrians wait, followed by the Yellow warning phase before vehicles are required to stop. In the Red state, vehicles remain stopped and pedestrian requests are evaluated.
+Machine Description:
+The traffic intersection control system is modeled as a Mealy Machine, where the outputs depend on both the current state and the input conditions. This allows the system to respond immediately to events such as timeouts and pedestrian requests, ensuring safe and efficient coordination between vehicle and pedestrian traffic.
 
-The system accepts two primary input signals. A Timeout input triggers automatic state transitions after a fixed duration, while Walk = true indicates that a pedestrian has pressed the crossing request button. These inputs influence both the system’s state transitions and output behavior.
+Start State:
+Q0 (Green)
 
-Based on the current state and inputs, the system produces outputs for both vehicles and pedestrians. The Car Signal may display Green, Yellow, or Red, while the Pedestrian Signal may display Walk, Don’t Walk, or Flashing. When a pedestrian request is detected, the system enters the Red Wait state to ensure safety before allowing pedestrians to cross during the Red Crossing state, while vehicles remain stopped.
+Set of States (Q):
+Q = { 
+    Q0 (Green), 
+    Q1 (Yellow), 
+    Q2 (Red), 
+    Q3 (Red Wait), 
+    Q4 (Red Crossing), 
+    Q5 (Green Finish) 
+}
 
-After the pedestrian crossing is completed, or if no pedestrian request exists, the system transitions through the Green Finish state and resets to the Green state, allowing normal traffic flow to resume. As a Mealy Machine, the system updates its outputs immediately in response to input changes, ensuring responsive and efficient intersection control.
-";
+Input Alphabet (Σ):
+Σ = { timeout, walk = true, no_request, reset }
+
+Output Alphabet (Λ):
+Λ = { 
+    CarSignal = { Green, Yellow, Red }, 
+    PedestrianSignal = { Walk, DontWalk } 
+}
+
+Final State:
+Q5 (Green Finish)
+
+State Traversal / Transition Function (δ):
+
+Q0 (Green)
+    -- timeout --> Q1 (Yellow)
+
+Q1 (Yellow)
+    -- timeout --> Q2 (Red)
+
+Q2 (Red)
+    -- walk = true --> Q3 (Red Wait)
+    -- no_request --> Q0 (Green)
+
+Q3 (Red Wait)
+    -- timeout --> Q4 (Red Crossing)
+
+Q4 (Red Crossing)
+    -- timeout --> Q5 (Green Finish)
+
+Q5 (Green Finish)
+    -- reset --> Q0 (Green)
+
+State Traversal Description:
+The system begins in state Q0 (Green), where vehicles are allowed to proceed and pedestrians are restricted.
+After a timeout occurs, the system transitions from Q0 to Q1 (Yellow) as a warning phase for vehicles.
+Following another timeout, the system moves from Q1 to Q2 (Red), stopping vehicle traffic completely.
+
+While in state Q2 (Red), the system evaluates pedestrian input.
+If a pedestrian request is detected (walk = true), the system transitions to Q3 (Red Wait) to ensure a safe delay before crossing.
+If no pedestrian request is present, the system returns directly from Q2 to Q0 (Green).
+
+From Q3 (Red Wait), a timeout causes the system to move to Q4 (Red Crossing), allowing pedestrians to cross while vehicles remain stopped.
+After the crossing period ends due to a timeout, the system transitions to Q5 (Green Finish).
+Finally, upon receiving a reset input, the system returns from Q5 to Q0 (Green), resuming normal traffic operation.";
+
+            // 🔥 THIS IS THE MAGIC
+            descriptionLabel.Height = TextRenderer.MeasureText(
+                descriptionLabel.Text,
+                descriptionLabel.Font,
+                new Size(descriptionLabel.Width, int.MaxValue),
+                TextFormatFlags.WordBreak
+            ).Height;
         }
+
+
+
 
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
